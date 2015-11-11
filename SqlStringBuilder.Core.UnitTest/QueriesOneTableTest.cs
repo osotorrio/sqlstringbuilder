@@ -57,6 +57,18 @@ namespace SqlStringBuilder.Core.UnitTest
             AssertAreEqual(() => _query.Where("ColumnA = @ColumnA"), " WHERE ColumnA = @ColumnA;");
         }
 
+        [Test]
+        public void IsNull_Should_Add_An_Space_Before_Key_Words()
+        {
+            AssertAreEqual(_query.IsNull, " IS NULL;");
+        }
+
+        [Test]
+        public void IsNotNull_Should_Add_An_Space_Before_Key_Words()
+        {
+            AssertAreEqual(_query.IsNotNull, " IS NOT NULL;");
+        }
+
         private static void AssertAreEqual(Func<SqlStringBuilder> sqlStringBuilderMethod, string expectedQuery)
         {
             //Act

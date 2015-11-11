@@ -11,6 +11,30 @@ namespace SqlStringBuilder.Core
             _query = new StringBuilder();
         }
 
+        private SqlStringBuilder AppendWithSpaceAtBeginning(string partialQuery)
+        {
+            _query.AppendFormat(" {0}", partialQuery);
+            return this;
+        }
+
+        private SqlStringBuilder AppendWithSpaceAtBeginningAndBetween(string keyword, string partialQuery)
+        {
+            _query.AppendFormat(" {0} {1}", keyword, partialQuery);
+            return this;
+        }
+
+        private SqlStringBuilder AppendWithSpaceInBetween(string keyword, string partialQuery)
+        {
+            _query.AppendFormat("{0} {1}", keyword, partialQuery);
+            return this;
+        }
+
+        private SqlStringBuilder AppendWithoutSpaces(string partialQuery)
+        {
+            _query.Append(partialQuery);
+            return this;
+        }
+
         public override string ToString()
         {
             _query.Append(";");
@@ -42,22 +66,14 @@ namespace SqlStringBuilder.Core
             return AppendWithSpaceAtBeginningAndBetween("WHERE", conditions);
         }
 
-        private SqlStringBuilder AppendWithoutSpaces(string partialQuery)
+        public SqlStringBuilder IsNull()
         {
-            _query.Append(partialQuery);
-            return this;
+            return AppendWithSpaceAtBeginning("IS NULL");
         }
 
-        private SqlStringBuilder AppendWithSpaceInBetween(string keyword, string partialQuery)
+        public SqlStringBuilder IsNotNull()
         {
-            _query.AppendFormat("{0} {1}", keyword, partialQuery);
-            return this;
-        }
-
-        private SqlStringBuilder AppendWithSpaceAtBeginningAndBetween(string keyword, string partialQuery)
-        {
-            _query.AppendFormat(" {0} {1}", keyword, partialQuery);
-            return this;
+            return AppendWithSpaceAtBeginning("IS NOT NULL");
         }
     }
 }

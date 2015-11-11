@@ -7,5 +7,7 @@
         SqlStringBuilder Select(string parameters);
         SqlStringBuilder From(string tableName);
         SqlStringBuilder Where(string conditions);
+        SqlStringBuilder IsNull();
+        SqlStringBuilder IsNotNull();
     }
 }

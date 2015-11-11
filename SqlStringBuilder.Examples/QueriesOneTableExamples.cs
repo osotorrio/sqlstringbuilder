@@ -65,5 +65,31 @@ namespace SqlStringBuilder.Examples
 
             Assert.That(query, Is.EqualTo(selectWhere));
         }
+
+        [Test]
+        public void Where_Is_Not_Null_Example()
+        {
+            const string selectWhere = "SELECT ALL * FROM TableName WHERE ColumnA IS NOT NULL;";
+
+            string query = _query.SelectAll()
+                .From("TableName")
+                .Where("ColumnA").IsNotNull()
+                .ToString();
+
+            Assert.That(query, Is.EqualTo(selectWhere));
+        }
+
+        [Test]
+        public void Where_Is_Null_Example()
+        {
+            const string selectWhere = "SELECT ALL * FROM TableName WHERE ColumnA IS NULL;";
+
+            string query = _query.SelectAll()
+                .From("TableName")
+                .Where("ColumnA").IsNull()
+                .ToString();
+
+            Assert.That(query, Is.EqualTo(selectWhere));
+        }
     }
 }
