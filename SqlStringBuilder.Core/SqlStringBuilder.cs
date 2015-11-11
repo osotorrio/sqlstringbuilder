@@ -19,31 +19,44 @@ namespace SqlStringBuilder.Core
 
         public SqlStringBuilder SelectAll()
         {
-            _query.Append("SELECT ALL *");
-            return this;
+            return AppendWithoutSpaces("SELECT ALL *");
         }
 
         public SqlStringBuilder SelectDistinct()
         {
-            _query.Append("SELECT DISTINCT *");
-            return this;
+            return AppendWithoutSpaces("SELECT DISTINCT *");
         }
 
         public SqlStringBuilder Select(string parameters)
         {
-            _query.AppendFormat("SELECT {0}", parameters);
-            return this;
+            return AppendWithSpaceInBetween("SELECT", parameters);
         }
 
         public SqlStringBuilder From(string tableName)
         {
-            _query.AppendFormat(" FROM {0}", tableName);
-            return this;
+            return AppendWithSpaceAtBeginningAndBetween("FROM", tableName);
         }
 
         public SqlStringBuilder Where(string conditions)
         {
-            _query.AppendFormat(" WHERE {0}", conditions);
+            return AppendWithSpaceAtBeginningAndBetween("WHERE", conditions);
+        }
+
+        private SqlStringBuilder AppendWithoutSpaces(string partialQuery)
+        {
+            _query.Append(partialQuery);
+            return this;
+        }
+
+        private SqlStringBuilder AppendWithSpaceInBetween(string keyword, string partialQuery)
+        {
+            _query.AppendFormat("{0} {1}", keyword, partialQuery);
+            return this;
+        }
+
+        private SqlStringBuilder AppendWithSpaceAtBeginningAndBetween(string keyword, string partialQuery)
+        {
+            _query.AppendFormat(" {0} {1}", keyword, partialQuery);
             return this;
         }
     }
