@@ -10,5 +10,11 @@ namespace SqlStringBuilder.Core
         {
             _query = new StringBuilder();
         }
+
+        public override string ToString()
+        {
+            _query.Append(";");
+            return _query.ToString();
+        }
     }
 }
