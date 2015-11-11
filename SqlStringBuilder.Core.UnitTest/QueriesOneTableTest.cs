@@ -46,9 +46,15 @@ namespace SqlStringBuilder.Core.UnitTest
         }
 
         [Test]
-        public void From_Should_Add_An_Space_Before_From_Keyword_And_Table_Name_After()
+        public void From_Should_Add_An_Space_Before_Keyword_And_Table_Name_After()
         {
             AssertAreEqual(() => _query.From("TableName"), " FROM TableName;");
+        }
+
+        [Test]
+        public void Where_Should_Add_An_Space_Before_Keyword_And_Conditions_After()
+        {
+            AssertAreEqual(() => _query.Where("ColumnA = @ColumnA"), " WHERE ColumnA = @ColumnA;");
         }
 
         private static void AssertAreEqual(Func<SqlStringBuilder> sqlStringBuilderMethod, string expectedQuery)

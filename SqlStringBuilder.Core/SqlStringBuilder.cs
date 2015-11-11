@@ -40,5 +40,11 @@ namespace SqlStringBuilder.Core
             _query.AppendFormat(" FROM {0}", tableName);
             return this;
         }
+
+        public SqlStringBuilder Where(string conditions)
+        {
+            _query.AppendFormat(" WHERE {0}", conditions);
+            return this;
+        }
     }
 }
