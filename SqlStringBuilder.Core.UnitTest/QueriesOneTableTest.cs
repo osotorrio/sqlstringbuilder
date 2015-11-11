@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 namespace SqlStringBuilder.Core.UnitTest
 {
@@ -29,50 +30,31 @@ namespace SqlStringBuilder.Core.UnitTest
         [Test]
         public void SelectAll_Should_Return_A_Select_All_Statement()
         {
-            //Arrange
-            const string expectedQuery = "SELECT ALL *;";
-
-            //Act
-            string actualQuery = _query.SelectAll().ToString();
-
-            //Assert
-            Assert.That(actualQuery, Is.EqualTo(expectedQuery));
+            AssertAreEqual(_query.SelectAll, "SELECT ALL *;");
         }
 
         [Test]
         public void SelectDistinct_Should_Return_A_Select_Distinct_Statement()
         {
-            //Arrange
-            const string expectedQuery = "SELECT DISTINCT *;";
-
-            //Act
-            string actualQuery = _query.SelectDistinct().ToString();
-
-            //Assert
-            Assert.That(actualQuery, Is.EqualTo(expectedQuery));
+            AssertAreEqual(_query.SelectDistinct, "SELECT DISTINCT *;");
         }
 
         [Test]
         public void Select_Should_Add_Parameters_To_Select_Statement()
         {
-            //Arrange
-            const string expectedQuery = "SELECT ColumnA, ColumnB;";
-
-            //Act
-            string actualQuery = _query.Select("ColumnA, ColumnB").ToString();
-
-            //Assert
-            Assert.That(actualQuery, Is.EqualTo(expectedQuery));
+            AssertAreEqual(() => _query.Select("ColumnA, ColumnB"), "SELECT ColumnA, ColumnB;");
         }
 
         [Test]
         public void From_Should_Add_An_Space_Before_From_Keyword_And_Table_Name_After()
         {
-            //Arrange
-            const string expectedQuery = " FROM TableName;";
+            AssertAreEqual(() => _query.From("TableName"), " FROM TableName;");
+        }
 
+        private static void AssertAreEqual(Func<SqlStringBuilder> sqlStringBuilderMethod, string expectedQuery)
+        {
             //Act
-            string actualQuery = _query.From("TableName").ToString();
+            string actualQuery = sqlStringBuilderMethod().ToString();
 
             //Assert
             Assert.That(actualQuery, Is.EqualTo(expectedQuery));
