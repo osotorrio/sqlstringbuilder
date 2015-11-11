@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 namespace SqlStringBuilder.Core.UnitTest
 {
@@ -21,6 +22,32 @@ namespace SqlStringBuilder.Core.UnitTest
 
             //Act
             string actualQuery = _query.ToString();
+
+            //Assert
+            Assert.That(actualQuery, Is.EqualTo(expectedQuery));
+        }
+
+        [Test]
+        public void SelectAll_Should_Return_A_Select_All_Statement()
+        {
+            //Arrange
+            const string expectedQuery = "SELECT ALL *;";
+
+            //Act
+            string actualQuery = _query.SelectAll().ToString();
+
+            //Assert
+            Assert.That(actualQuery, Is.EqualTo(expectedQuery));
+        }
+
+        [Test]
+        public void SelectDistinct_Should_Return_A_Select_Distinct_Statement()
+        {
+            //Arrange
+            const string expectedQuery = "SELECT DISTINCT *;";
+
+            //Act
+            string actualQuery = _query.SelectDistinct().ToString();
 
             //Assert
             Assert.That(actualQuery, Is.EqualTo(expectedQuery));

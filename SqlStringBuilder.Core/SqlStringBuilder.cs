@@ -16,5 +16,17 @@ namespace SqlStringBuilder.Core
             _query.Append(";");
             return _query.ToString();
         }
+
+        public SqlStringBuilder SelectAll()
+        {
+            _query.Append("SELECT ALL *");
+            return this;
+        }
+
+        public SqlStringBuilder SelectDistinct()
+        {
+            _query.Append("SELECT DISTINCT *");
+            return this;
+        }
     }
 }
