@@ -1,5 +1,4 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace SqlStringBuilder.Core.UnitTest
 {
@@ -48,6 +47,32 @@ namespace SqlStringBuilder.Core.UnitTest
 
             //Act
             string actualQuery = _query.SelectDistinct().ToString();
+
+            //Assert
+            Assert.That(actualQuery, Is.EqualTo(expectedQuery));
+        }
+
+        [Test]
+        public void Select_Should_Add_Parameters_To_Select_Statement()
+        {
+            //Arrange
+            const string expectedQuery = "SELECT ColumnA, ColumnB;";
+
+            //Act
+            string actualQuery = _query.Select("ColumnA, ColumnB").ToString();
+
+            //Assert
+            Assert.That(actualQuery, Is.EqualTo(expectedQuery));
+        }
+
+        [Test]
+        public void From_Should_Add_An_Space_Before_From_Keyword_And_Table_Name_After()
+        {
+            //Arrange
+            const string expectedQuery = " FROM TableName;";
+
+            //Act
+            string actualQuery = _query.From("TableName").ToString();
 
             //Assert
             Assert.That(actualQuery, Is.EqualTo(expectedQuery));
