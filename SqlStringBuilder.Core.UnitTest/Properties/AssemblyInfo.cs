@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SqlStringBuilder.Core.Test")]
+[assembly: AssemblyTitle("SqlStringBuilder.Core.UnitTest")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SqlStringBuilder.Core.Test")]
+[assembly: AssemblyProduct("SqlStringBuilder.Core.UnitTest")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("10026c5b-5a07-4384-ac40-30cec6f9d344")]
+[assembly: Guid("608cd72d-e79e-4d46-9150-46a5124bdde2")]
 
 // Version information for an assembly consists of the following four values:
 //
