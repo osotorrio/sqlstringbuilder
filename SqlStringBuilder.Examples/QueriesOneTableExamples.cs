@@ -42,5 +42,18 @@ namespace SqlStringBuilder.Examples
 
             Assert.That(query, Is.EqualTo(selectColumns));
         }
+
+        [Test]
+        public void Simple_Where_Example()
+        {
+            const string selectWhere = "SELECT ALL * FROM TableName WHERE ColumnA = @ColumnA;";
+
+            string query = _query.SelectAll()
+                .From("TableName")
+                .Where("ColumnA = @ColumnA")
+                .ToString();
+
+            Assert.That(query, Is.EqualTo(selectWhere));
+        }
     }
 }
