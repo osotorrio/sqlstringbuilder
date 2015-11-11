@@ -44,6 +44,16 @@ namespace SqlStringBuilder.Examples
         }
 
         [Test]
+        public void Select_Columns_With_Alias_Example()
+        {
+            const string selectColumns = "SELECT T.ColumnA AS SomeAlias FROM TableName AS T;";
+
+            string query = _query.Select("T.ColumnA AS SomeAlias").From("TableName AS T").ToString();
+
+            Assert.That(query, Is.EqualTo(selectColumns));
+        }
+
+        [Test]
         public void Simple_Where_Example()
         {
             const string selectWhere = "SELECT ALL * FROM TableName WHERE ColumnA = @ColumnA;";
