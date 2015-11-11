@@ -6,7 +6,7 @@ namespace SqlStringBuilder.Core.UnitTest
     [TestFixture]
     class QueriesOneTableTest
     {
-        private SqlStringBuilder _query;
+        private ISqlStringBuilder _query;
 
         [SetUp]
         public void InitBeforeEachTest()
