@@ -4,7 +4,7 @@ namespace SqlStringBuilder.Core
 {
     public class SqlStringBuilder
     {
-        private StringBuilder _query;
+        private readonly StringBuilder _query;
 
         public SqlStringBuilder()
         {
