@@ -86,9 +86,9 @@ namespace SqlStringBuilder.Core
             return AppendWithSpaceAtBeginningAndBetween("OR", conditions);
         }
 
-        public SqlStringBuilder Between(string conditions)
+        public SqlStringBuilder Between(string parameter)
         {
-            return AppendWithSpaceAtBeginningAndBetween("BETWEEN", conditions);
+            return AppendWithSpaceAtBeginningAndBetween("BETWEEN", parameter);
         }
     }
 }

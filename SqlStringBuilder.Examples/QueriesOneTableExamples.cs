@@ -99,8 +99,7 @@ namespace SqlStringBuilder.Examples
 
             string query = _query.SelectAll()
                 .From("TableName")
-                .Where("ColumnA")
-                .Between("@Param1").And("@Param2")
+                .Where("ColumnA").Between("@Param1").And("@Param2")
                 .Or("ColumnA > @Param3")
                 .ToString();
 

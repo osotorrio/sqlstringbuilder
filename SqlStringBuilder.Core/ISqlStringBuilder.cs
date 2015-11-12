@@ -11,6 +11,6 @@
         SqlStringBuilder IsNotNull();
         SqlStringBuilder And(string conditions);
         SqlStringBuilder Or(string conditions);
-        SqlStringBuilder Between(string p);
+        SqlStringBuilder Between(string parameter);
     }
 }
