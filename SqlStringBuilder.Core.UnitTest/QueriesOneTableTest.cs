@@ -58,31 +58,31 @@ namespace SqlStringBuilder.Core.UnitTest
         }
 
         [Test]
-        public void IsNull_Should_Add_An_Space_Before_Key_Words()
+        public void IsNull_Should_Add_An_Space_Before_Keywords()
         {
             AssertAreEqual(_query.IsNull, " IS NULL;");
         }
 
         [Test]
-        public void IsNotNull_Should_Add_An_Space_Before_Key_Words()
+        public void IsNotNull_Should_Add_An_Space_Before_Keywords()
         {
             AssertAreEqual(_query.IsNotNull, " IS NOT NULL;");
         }
 
         [Test]
-        public void And_Should_Add_An_Space_Before_Key_Word_And_Conditions_After()
+        public void And_Should_Add_An_Space_Before_Keyword_And_The_Conditions_After()
         {
             AssertAreEqual(() => _query.And("ColumnB < @ColumnB"), " AND ColumnB < @ColumnB;");
         }
 
         [Test]
-        public void Or_Should_Add_An_Space_Before_Key_Word_And_Conditions_After()
+        public void Or_Should_Add_An_Space_Before_Keyword_And_the_Conditions_After()
         {
             AssertAreEqual(() => _query.Or("ColumnB < @ColumnB"), " OR ColumnB < @ColumnB;");
         }
 
         [Test]
-        public void Between_Should_Add_Space_Before_Key_Word_And_The_Parameter_After()
+        public void Between_Should_Add_Space_Before_Keyword_And_The_Parameter_After()
         {
             AssertAreEqual(() => _query.Between("@ColumnB"), " BETWEEN @ColumnB;");
         }
