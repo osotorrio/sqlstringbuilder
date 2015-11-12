@@ -67,6 +67,47 @@ namespace SqlStringBuilder.Examples
         }
 
         [Test]
+        public void Combining_Where_Conditions_Example_1()
+        {
+            const string selectWhere = "SELECT ALL * FROM TableName WHERE ColumnA = @ColumnA AND ColumnB < @ColumnB;";
+
+            string query = _query.SelectAll()
+                .From("TableName")
+                .Where("ColumnA = @ColumnA").And("ColumnB < @ColumnB")
+                .ToString();
+
+            Assert.That(query, Is.EqualTo(selectWhere));
+        }
+
+        [Test]
+        public void Combining_Where_Conditions_Example_2()
+        {
+            const string selectWhere = "SELECT ALL * FROM TableName WHERE ColumnA BETWEEN @Param1 AND @Param2;";
+
+            string query = _query.SelectAll()
+                .From("TableName")
+                .Where("ColumnA").Between("@Param1").And("@Param2")
+                .ToString();
+
+            Assert.That(query, Is.EqualTo(selectWhere));
+        }
+
+        [Test]
+        public void Combining_Where_Conditions_Example_3()
+        {
+            const string selectWhere = "SELECT ALL * FROM TableName WHERE ColumnA BETWEEN @Param1 AND @Param2 OR ColumnA > @Param3;";
+
+            string query = _query.SelectAll()
+                .From("TableName")
+                .Where("ColumnA")
+                .Between("@Param1").And("@Param2")
+                .Or("ColumnA > @Param3")
+                .ToString();
+
+            Assert.That(query, Is.EqualTo(selectWhere));
+        }
+
+        [Test]
         public void Where_Is_Not_Null_Example()
         {
             const string selectWhere = "SELECT ALL * FROM TableName WHERE ColumnA IS NOT NULL;";

@@ -75,5 +75,20 @@ namespace SqlStringBuilder.Core
         {
             return AppendWithSpaceAtBeginning("IS NOT NULL");
         }
+
+        public SqlStringBuilder And(string conditions)
+        {
+            return AppendWithSpaceAtBeginningAndBetween("AND", conditions);
+        }
+
+        public SqlStringBuilder Or(string conditions)
+        {
+            return AppendWithSpaceAtBeginningAndBetween("OR", conditions);
+        }
+
+        public SqlStringBuilder Between(string conditions)
+        {
+            return AppendWithSpaceAtBeginningAndBetween("BETWEEN", conditions);
+        }
     }
 }

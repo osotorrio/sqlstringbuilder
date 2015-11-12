@@ -69,10 +69,28 @@ namespace SqlStringBuilder.Core.UnitTest
             AssertAreEqual(_query.IsNotNull, " IS NOT NULL;");
         }
 
+        [Test]
+        public void And_Should_Add_An_Space_Before_Key_Word()
+        {
+            AssertAreEqual(() => _query.And("ColumnB < @ColumnB"), " AND ColumnB < @ColumnB;");
+        }
+
+        [Test]
+        public void Or_Should_Add_An_Space_Before_Key_Word()
+        {
+            AssertAreEqual(() => _query.Or("ColumnB < @ColumnB"), " OR ColumnB < @ColumnB;");
+        }
+
+        [Test]
+        public void Between_Should_Add_Space_Before_Key_Word()
+        {
+            AssertAreEqual(() => _query.Between("@ColumnB"), " BETWEEN @ColumnB;");
+        }
+
         private static void AssertAreEqual(Func<SqlStringBuilder> sqlStringBuilderMethod, string expectedQuery)
         {
             //Act
-            string actualQuery = sqlStringBuilderMethod().ToString();
+            string actualQuery = sqlStringBuilderMethod.Invoke().ToString();
 
             //Assert
             Assert.That(actualQuery, Is.EqualTo(expectedQuery));
