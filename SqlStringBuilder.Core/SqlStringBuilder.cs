@@ -23,9 +23,21 @@ namespace SqlStringBuilder.Core
             return this;
         }
 
+        private SqlStringBuilder AppendWithSpaceAtBeginningInBetweenAndExtraKeyword(string keyword, string columnNames, string extraKeyword)
+        {
+            _query.AppendFormat(" {0} {1} {2}", keyword, columnNames, extraKeyword);
+            return this;
+        }
+
         private SqlStringBuilder AppendWithSpaceInBetween(string keyword, string partialQuery)
         {
             _query.AppendFormat("{0} {1}", keyword, partialQuery);
+            return this;
+        }
+
+        private SqlStringBuilder AppendWithSpaceInBetweenAndExtraKeyword(string keyword, string partialQuery, string extraKeyword)
+        {
+            _query.AppendFormat("{0} {1} {2}", keyword, partialQuery, extraKeyword);
             return this;
         }
 
@@ -89,6 +101,20 @@ namespace SqlStringBuilder.Core
         public SqlStringBuilder Between(string parameter)
         {
             return AppendWithSpaceAtBeginningAndBetween("BETWEEN", parameter);
+        }
+
+        public SqlStringBuilder OrderByAscending(string columnNames)
+        {
+            return _query.ToString().Contains("ORDER BY")
+                ? AppendWithSpaceInBetweenAndExtraKeyword(",", columnNames, "ASC")
+                : AppendWithSpaceAtBeginningInBetweenAndExtraKeyword("ORDER BY", columnNames, "ASC");
+        }
+
+        public SqlStringBuilder OrderByDescending(string columnNames)
+        {
+            return _query.ToString().Contains("ORDER BY")
+                ? AppendWithSpaceInBetweenAndExtraKeyword(",", columnNames, "DESC")
+                : AppendWithSpaceAtBeginningInBetweenAndExtraKeyword("ORDER BY", columnNames, "DESC");
         }
     }
 }

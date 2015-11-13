@@ -87,6 +87,33 @@ namespace SqlStringBuilder.Core.UnitTest
             AssertAreEqual(() => _query.Between("@ColumnB"), " BETWEEN @ColumnB;");
         }
 
+        [Test]
+        public void OrderByAscending_Should_Add_Space_Before_keyword_And_Column_Names_Before_Asc()
+        {
+            //ORDER BY column_name ASC|DESC, column_name ASC|DESC;
+            AssertAreEqual(() => _query.OrderByAscending("ColumnA"), " ORDER BY ColumnA ASC;");
+        }
+
+        [Test]
+        public void OrderByAscending_Should_Include_Coma_When_There_Is_Already_Order_By()
+        {
+            _query.OrderByAscending("ColumnA");
+            AssertAreEqual(() => _query.OrderByAscending("ColumnB"), " ORDER BY ColumnA ASC, ColumnB ASC;");
+        }
+
+        [Test]
+        public void OrderByDescending_Should_Add_Space_Before_keyword_And_Column_Names_Before_Asc()
+        {
+            AssertAreEqual(() => _query.OrderByDescending("ColumnA"), " ORDER BY ColumnA DESC;");
+        }
+
+        [Test]
+        public void OrderByDescending_Should_Include_Coma_When_There_Is_Already_Order_By()
+        {
+            _query.OrderByDescending("ColumnA");
+            AssertAreEqual(() => _query.OrderByDescending("ColumnB"), " ORDER BY ColumnA DESC, ColumnB DESC;");
+        }
+
         private static void AssertAreEqual(Func<SqlStringBuilder> sqlStringBuilderMethod, string expectedQuery)
         {
             //Act

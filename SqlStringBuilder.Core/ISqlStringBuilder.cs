@@ -12,5 +12,7 @@
         SqlStringBuilder And(string conditions);
         SqlStringBuilder Or(string conditions);
         SqlStringBuilder Between(string parameter);
+        SqlStringBuilder OrderByAscending(string columnNames);
+        SqlStringBuilder OrderByDescending(string columnNames);
     }
 }

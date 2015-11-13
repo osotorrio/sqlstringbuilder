@@ -131,5 +131,45 @@ namespace SqlStringBuilder.Examples
 
             Assert.That(query, Is.EqualTo(selectWhere));
         }
+
+        [Test]
+        public void OrderBy_Single_Column_Example()
+        {
+            const string selectOrderBy = "SELECT ALL * FROM TableName ORDER BY ColumnA ASC;";
+
+            string query = _query.SelectAll()
+                .From("TableName")
+                .OrderByAscending("ColumnA")
+                .ToString();
+
+            Assert.That(query, Is.EqualTo(selectOrderBy));
+        }
+
+        [Test]
+        public void OrderBy_Multiple_Columns_Example()
+        {
+            const string selectOrderBy = "SELECT ALL * FROM TableName ORDER BY ColumnA, ColumnB ASC;";
+
+            string query = _query.SelectAll()
+                .From("TableName")
+                .OrderByAscending("ColumnA, ColumnB")
+                .ToString();
+
+            Assert.That(query, Is.EqualTo(selectOrderBy));
+        }
+
+        [Test]
+        public void OrderBy_Combining_Order_By_Example()
+        {
+            const string selectOrderBy = "SELECT ALL * FROM TableName ORDER BY ColumnA, ColumnB ASC, ColumnC DESC;";
+
+            string query = _query.SelectAll()
+                .From("TableName")
+                .OrderByAscending("ColumnA, ColumnB")
+                .OrderByDescending("ColumnC")
+                .ToString();
+
+            Assert.That(query, Is.EqualTo(selectOrderBy));
+        }
     }
 }
