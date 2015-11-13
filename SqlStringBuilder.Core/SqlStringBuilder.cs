@@ -105,16 +105,19 @@ namespace SqlStringBuilder.Core
 
         public SqlStringBuilder OrderByAscending(string columnNames)
         {
-            return _query.ToString().Contains("ORDER BY")
-                ? AppendWithSpaceInBetweenAndExtraKeyword(",", columnNames, "ASC")
-                : AppendWithSpaceAtBeginningInBetweenAndExtraKeyword("ORDER BY", columnNames, "ASC");
+            return OrderBy(columnNames, "ASC");
         }
 
         public SqlStringBuilder OrderByDescending(string columnNames)
         {
+            return OrderBy(columnNames, "DESC");
+        }
+
+        private SqlStringBuilder OrderBy(string columnNames, string direction)
+        {
             return _query.ToString().Contains("ORDER BY")
-                ? AppendWithSpaceInBetweenAndExtraKeyword(",", columnNames, "DESC")
-                : AppendWithSpaceAtBeginningInBetweenAndExtraKeyword("ORDER BY", columnNames, "DESC");
+                ? AppendWithSpaceInBetweenAndExtraKeyword(",", columnNames, direction)
+                : AppendWithSpaceAtBeginningInBetweenAndExtraKeyword("ORDER BY", columnNames, direction);
         }
     }
 }
