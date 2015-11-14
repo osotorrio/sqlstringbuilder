@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace SqlStringBuilder.Core.UnitTest
 {
     [TestFixture]
-    class QueringOneTableTest: BaseTest
+    class QueringOneTableTest: TestBase
     {
         [Test]
         public void ToString_Should_Add_A_Semicolon()

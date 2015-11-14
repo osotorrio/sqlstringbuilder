@@ -3,7 +3,7 @@
 namespace SqlStringBuilder.Examples
 {
     [TestFixture]
-    class QueriesOneTableExamples
+    class QueringOneTableExamples
     {
         private Core.ISqlStringBuilder _query;
 

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Linq;
+using System.Text;
 
 namespace SqlStringBuilder.Core
 {
@@ -68,9 +69,9 @@ namespace SqlStringBuilder.Core
             return AppendWithSpaceInBetween("SELECT", parameters);
         }
 
-        public SqlStringBuilder From(string tableName)
+        public SqlStringBuilder From(params string[] tableNames)
         {
-            return AppendWithSpaceAtBeginningAndBetween("FROM", tableName);
+            return AppendWithSpaceAtBeginningAndBetween("FROM", string.Join(", ", tableNames));
         }
 
         public SqlStringBuilder Where(string conditions)

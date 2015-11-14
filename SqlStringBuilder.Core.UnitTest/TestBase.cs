@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace SqlStringBuilder.Core.UnitTest
 {
     [SetUpFixture]
-    class BaseTest
+    class TestBase
     {
         protected ISqlStringBuilder Query;
 
