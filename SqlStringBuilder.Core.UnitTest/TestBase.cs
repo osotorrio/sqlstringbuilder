@@ -1,6 +1,5 @@
 ﻿using System;
 using NUnit.Framework;
-using SqlBuilder.Core;
 
 namespace SqlBuilder.Core.UnitTest
 {
@@ -9,11 +8,6 @@ namespace SqlBuilder.Core.UnitTest
     {
         protected ISqlStringBuilder Query;
 
-        [SetUp]
-        protected void InitBeforeEachTest()
-        {
-            Query = new SqlStringBuilder();
-        }
         protected static void AssertAreEqual(Func<SqlStringBuilder> sqlStringBuilderMethod, string expectedQuery)
         {
             //Act

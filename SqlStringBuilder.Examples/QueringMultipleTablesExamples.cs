@@ -11,7 +11,7 @@ namespace SqlBuilder.Examples
         [SetUp]
         public void InitBeforeEachTest()
         {
-            _query = new Core.SqlStringBuilder();
+            _query = new SqlStringBuilder();
         }
 
         [Test]

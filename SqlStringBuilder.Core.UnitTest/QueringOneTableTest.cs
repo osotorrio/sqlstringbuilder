@@ -1,11 +1,16 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace SqlBuilder.Core.UnitTest
 {
     [TestFixture]
     class QueringOneTableTest: TestBase
     {
+        [SetUp]
+        protected void InitBeforeEachTest()
+        {
+            Query = new SqlStringBuilder();
+        }
+
         [Test]
         public void ToString_Should_Add_A_Semicolon()
         {
