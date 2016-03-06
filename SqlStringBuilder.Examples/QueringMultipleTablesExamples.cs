@@ -6,7 +6,7 @@ namespace SqlBuilder.Examples
     [TestFixture]
     class QueringMultipleTablesExamples
     {
-        private ISqlStringBuilder _query;
+        private IQueryCommands _query;
 
         [SetUp]
         public void InitBeforeEachTest()

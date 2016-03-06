@@ -6,7 +6,7 @@ namespace SqlBuilder.Core.UnitTest
     [SetUpFixture]
     class TestBase
     {
-        protected ISqlStringBuilder Query;
+        protected IQueryCommands Query;
 
         protected static void AssertAreEqual(Func<SqlStringBuilder> sqlStringBuilderMethod, string expectedQuery)
         {

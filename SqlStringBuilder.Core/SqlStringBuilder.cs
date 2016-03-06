@@ -3,7 +3,7 @@ using System.Text;
 
 namespace SqlBuilder.Core
 {
-    public class SqlStringBuilder : ISqlStringBuilder
+    public class SqlStringBuilder : IQueryCommands, ICUDCommands
     {
         private readonly StringBuilder _query;
 
@@ -12,42 +12,7 @@ namespace SqlBuilder.Core
             _query = new StringBuilder();
         }
 
-        private SqlStringBuilder AppendWithSpaceAtBeginning(string partialQuery)
-        {
-            _query.AppendFormat(" {0}", partialQuery);
-            return this;
-        }
-
-        private SqlStringBuilder AppendWithSpaceAtBeginningAndBetween(string keyword, string partialQuery)
-        {
-            _query.AppendFormat(" {0} {1}", keyword, partialQuery);
-            return this;
-        }
-
-        private SqlStringBuilder AppendWithSpaceAtBeginningInBetweenAndExtraKeyword(string keyword, string columnNames, string extraKeyword)
-        {
-            _query.AppendFormat(" {0} {1} {2}", keyword, columnNames, extraKeyword);
-            return this;
-        }
-
-        private SqlStringBuilder AppendWithSpaceInBetween(string keyword, string partialQuery)
-        {
-            _query.AppendFormat("{0} {1}", keyword, partialQuery);
-            return this;
-        }
-
-        private SqlStringBuilder AppendWithSpaceInBetweenAndExtraKeyword(string keyword, string partialQuery, string extraKeyword)
-        {
-            _query.AppendFormat("{0} {1} {2}", keyword, partialQuery, extraKeyword);
-            return this;
-        }
-
-        private SqlStringBuilder AppendWithoutSpaces(string partialQuery)
-        {
-            _query.Append(partialQuery);
-            return this;
-        }
-
+        #region IQueryCommands Implementation
         public override string ToString()
         {
             _query.Append(";");
@@ -113,6 +78,47 @@ namespace SqlBuilder.Core
         {
             return OrderBy(columnNames, "DESC");
         }
+        #endregion
+
+        #region ICUDCommands Implementation
+        #endregion
+
+        #region Private Methods
+        private SqlStringBuilder AppendWithSpaceAtBeginning(string partialQuery)
+        {
+            _query.AppendFormat(" {0}", partialQuery);
+            return this;
+        }
+
+        private SqlStringBuilder AppendWithSpaceAtBeginningAndBetween(string keyword, string partialQuery)
+        {
+            _query.AppendFormat(" {0} {1}", keyword, partialQuery);
+            return this;
+        }
+
+        private SqlStringBuilder AppendWithSpaceAtBeginningInBetweenAndExtraKeyword(string keyword, string columnNames, string extraKeyword)
+        {
+            _query.AppendFormat(" {0} {1} {2}", keyword, columnNames, extraKeyword);
+            return this;
+        }
+
+        private SqlStringBuilder AppendWithSpaceInBetween(string keyword, string partialQuery)
+        {
+            _query.AppendFormat("{0} {1}", keyword, partialQuery);
+            return this;
+        }
+
+        private SqlStringBuilder AppendWithSpaceInBetweenAndExtraKeyword(string keyword, string partialQuery, string extraKeyword)
+        {
+            _query.AppendFormat("{0} {1} {2}", keyword, partialQuery, extraKeyword);
+            return this;
+        }
+
+        private SqlStringBuilder AppendWithoutSpaces(string partialQuery)
+        {
+            _query.Append(partialQuery);
+            return this;
+        }
 
         private SqlStringBuilder OrderBy(string columnNames, string direction)
         {
@@ -120,5 +126,6 @@ namespace SqlBuilder.Core
                 ? AppendWithSpaceInBetweenAndExtraKeyword(",", columnNames, direction)
                 : AppendWithSpaceAtBeginningInBetweenAndExtraKeyword("ORDER BY", columnNames, direction);
         }
+        #endregion
     }
 }

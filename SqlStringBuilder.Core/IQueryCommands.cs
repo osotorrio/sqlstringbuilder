@@ -1,6 +1,6 @@
 ﻿namespace SqlBuilder.Core
 {
-    public interface ISqlStringBuilder
+    public interface IQueryCommands
     {
         SqlStringBuilder SelectAll();
         SqlStringBuilder SelectDistinct();

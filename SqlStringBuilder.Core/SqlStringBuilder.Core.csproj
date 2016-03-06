@@ -39,7 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ISqlStringBuilder.cs" />
+    <Compile Include="ICUDCommands.cs" />
+    <Compile Include="IQueryCommands.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlStringBuilder.cs" />
   </ItemGroup>

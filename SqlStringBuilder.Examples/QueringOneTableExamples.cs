@@ -6,7 +6,7 @@ namespace SqlBuilder.Examples
     [TestFixture]
     class QueringOneTableExamples
     {
-        private Core.ISqlStringBuilder _query;
+        private Core.IQueryCommands _query;
 
         [SetUp]
         public void InitBeforeEachTest()
