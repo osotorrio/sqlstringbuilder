@@ -1,11 +1,12 @@
 ﻿using NUnit.Framework;
+using SqlBuilder.Core;
 
-namespace SqlStringBuilder.Examples
+namespace SqlBuilder.Examples
 {
     [TestFixture]
     class QueringMultipleTablesExamples
     {
-        private Core.ISqlStringBuilder _query;
+        private ISqlStringBuilder _query;
 
         [SetUp]
         public void InitBeforeEachTest()

@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 
-namespace SqlStringBuilder.Core.UnitTest
+namespace SqlBuilder.Core.UnitTest
 {
     [TestFixture]
     class QueringOneTableTest: TestBase

@@ -1,4 +1,4 @@
-﻿namespace SqlStringBuilder.Core
+﻿namespace SqlBuilder.Core
 {
     public interface ISqlStringBuilder
     {

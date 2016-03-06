@@ -1,7 +1,8 @@
 ﻿using System;
 using NUnit.Framework;
+using SqlBuilder.Core;
 
-namespace SqlStringBuilder.Core.UnitTest
+namespace SqlBuilder.Core.UnitTest
 {
     [SetUpFixture]
     class TestBase

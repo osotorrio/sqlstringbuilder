@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace SqlStringBuilder.Examples
+namespace SqlBuilder.Examples
 {
     [TestFixture]
     class QueringOneTableExamples
