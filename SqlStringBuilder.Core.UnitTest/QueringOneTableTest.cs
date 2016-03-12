@@ -12,13 +12,13 @@ namespace SqlBuilder.Core.UnitTest
         }
 
         [Test]
-        public void ToString_Should_Add_A_Semicolon()
+        public void Semicolon_Should_Add_A_Semicolon()
         {
             //Arrange
             const string expectedQuery = ";";
 
             //Act
-            string actualQuery = Query.ToString();
+            string actualQuery = Query.Semicolon();
 
             //Assert
             Assert.That(actualQuery, Is.EqualTo(expectedQuery));

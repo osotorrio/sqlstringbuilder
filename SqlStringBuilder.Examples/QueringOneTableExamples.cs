@@ -19,7 +19,7 @@ namespace SqlBuilder.Examples
         {
             const string selectAll = "SELECT ALL * FROM TableName;";
 
-            string query = _query.SelectAll().From("TableName").ToString();
+            string query = _query.SelectAll().From("TableName").Semicolon();
 
             Assert.That(query, Is.EqualTo(selectAll));
         }
@@ -29,7 +29,7 @@ namespace SqlBuilder.Examples
         {
             const string selectDistinct = "SELECT DISTINCT * FROM TableName;";
 
-            string query = _query.SelectDistinct().From("TableName").ToString();
+            string query = _query.SelectDistinct().From("TableName").Semicolon();
 
             Assert.That(query, Is.EqualTo(selectDistinct));
         }
@@ -39,7 +39,7 @@ namespace SqlBuilder.Examples
         {
             const string selectColumns = "SELECT ColumnA, ColumnB FROM TableName;";
 
-            string query = _query.Select("ColumnA, ColumnB").From("TableName").ToString();
+            string query = _query.Select("ColumnA, ColumnB").From("TableName").Semicolon();
 
             Assert.That(query, Is.EqualTo(selectColumns));
         }
@@ -49,7 +49,7 @@ namespace SqlBuilder.Examples
         {
             const string selectColumns = "SELECT T.ColumnA AS SomeAlias FROM TableName AS T;";
 
-            string query = _query.Select("T.ColumnA AS SomeAlias").From("TableName AS T").ToString();
+            string query = _query.Select("T.ColumnA AS SomeAlias").From("TableName AS T").Semicolon();
 
             Assert.That(query, Is.EqualTo(selectColumns));
         }
@@ -62,7 +62,7 @@ namespace SqlBuilder.Examples
             string query = _query.SelectAll()
                 .From("TableName")
                 .Where("ColumnA = @ColumnA")
-                .ToString();
+                .Semicolon();
 
             Assert.That(query, Is.EqualTo(selectWhere));
         }
@@ -75,7 +75,7 @@ namespace SqlBuilder.Examples
             string query = _query.SelectAll()
                 .From("TableName")
                 .Where("ColumnA = @ColumnA").And("ColumnB < @ColumnB")
-                .ToString();
+                .Semicolon();
 
             Assert.That(query, Is.EqualTo(selectWhere));
         }
@@ -88,7 +88,7 @@ namespace SqlBuilder.Examples
             string query = _query.SelectAll()
                 .From("TableName")
                 .Where("ColumnA").Between("@Param1").And("@Param2")
-                .ToString();
+                .Semicolon();
 
             Assert.That(query, Is.EqualTo(selectWhere));
         }
@@ -102,7 +102,7 @@ namespace SqlBuilder.Examples
                 .From("TableName")
                 .Where("ColumnA").Between("@Param1").And("@Param2")
                 .Or("ColumnA > @Param3")
-                .ToString();
+                .Semicolon();
 
             Assert.That(query, Is.EqualTo(selectWhere));
         }
@@ -115,7 +115,7 @@ namespace SqlBuilder.Examples
             string query = _query.SelectAll()
                 .From("TableName")
                 .Where("ColumnA").IsNotNull()
-                .ToString();
+                .Semicolon();
 
             Assert.That(query, Is.EqualTo(selectWhere));
         }
@@ -128,7 +128,7 @@ namespace SqlBuilder.Examples
             string query = _query.SelectAll()
                 .From("TableName")
                 .Where("ColumnA").IsNull()
-                .ToString();
+                .Semicolon();
 
             Assert.That(query, Is.EqualTo(selectWhere));
         }
@@ -141,7 +141,7 @@ namespace SqlBuilder.Examples
             string query = _query.SelectAll()
                 .From("TableName")
                 .OrderByAscending("ColumnA")
-                .ToString();
+                .Semicolon();
 
             Assert.That(query, Is.EqualTo(selectOrderBy));
         }
@@ -154,7 +154,7 @@ namespace SqlBuilder.Examples
             string query = _query.SelectAll()
                 .From("TableName")
                 .OrderByAscending("ColumnA, ColumnB")
-                .ToString();
+                .Semicolon();
 
             Assert.That(query, Is.EqualTo(selectOrderBy));
         }
@@ -168,7 +168,7 @@ namespace SqlBuilder.Examples
                 .From("TableName")
                 .OrderByAscending("ColumnA, ColumnB")
                 .OrderByDescending("ColumnC")
-                .ToString();
+                .Semicolon();
 
             Assert.That(query, Is.EqualTo(selectOrderBy));
         }
