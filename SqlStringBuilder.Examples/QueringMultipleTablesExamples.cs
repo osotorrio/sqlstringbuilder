@@ -20,7 +20,7 @@ namespace SqlBuilder.Examples
             const string multipleTables = "SELECT ALL * FROM TableA, TableB, TableC;";
 
             string query = _query.SelectAll()
-                .From("TableA", "TableB", "TableC")
+                .From("TableA, TableB, TableC")
                 .ToString();
 
             Assert.That(query, Is.EqualTo(multipleTables));

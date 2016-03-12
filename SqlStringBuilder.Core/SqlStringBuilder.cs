@@ -1,10 +1,16 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Text;
 
 namespace SqlBuilder.Core
 {
     public class SqlStringBuilder : IQueryCommands, ICUDCommands
     {
+        public string Status
+        {
+            get { return _query.ToString(); }
+        }
+
         private readonly StringBuilder _query;
 
         public SqlStringBuilder()
@@ -15,58 +21,59 @@ namespace SqlBuilder.Core
         #region IQueryCommands Implementation
         public override string ToString()
         {
+            _query.TrimEnd();
             _query.Append(";");
             return _query.ToString();
         }
 
         public SqlStringBuilder SelectAll()
         {
-            return AppendWithoutSpaces("SELECT ALL *");
+            return AppendSpaceAtTheEnd("SELECT ALL *");
         }
 
         public SqlStringBuilder SelectDistinct()
         {
-            return AppendWithoutSpaces("SELECT DISTINCT *");
+            return AppendSpaceAtTheEnd("SELECT DISTINCT *");
         }
 
         public SqlStringBuilder Select(string parameters)
         {
-            return AppendWithSpaceInBetween("SELECT", parameters);
+            return AppendSpaceAtTheEnd("SELECT", parameters);
         }
 
-        public SqlStringBuilder From(params string[] tableNames)
+        public SqlStringBuilder From(string tableNamesSeparatedByComa)
         {
-            return AppendWithSpaceAtBeginningAndBetween("FROM", string.Join(", ", tableNames));
+            return AppendSpaceAtTheEnd("FROM", tableNamesSeparatedByComa);
         }
 
         public SqlStringBuilder Where(string conditions)
         {
-            return AppendWithSpaceAtBeginningAndBetween("WHERE", conditions);
+            return AppendSpaceAtTheEnd("WHERE", conditions);
         }
 
         public SqlStringBuilder IsNull()
         {
-            return AppendWithSpaceAtBeginning("IS NULL");
+            return AppendSpaceAtTheEnd("IS NULL");
         }
 
         public SqlStringBuilder IsNotNull()
         {
-            return AppendWithSpaceAtBeginning("IS NOT NULL");
+            return AppendSpaceAtTheEnd("IS NOT NULL");
         }
 
         public SqlStringBuilder And(string conditions)
         {
-            return AppendWithSpaceAtBeginningAndBetween("AND", conditions);
+            return AppendSpaceAtTheEnd("AND", conditions);
         }
 
         public SqlStringBuilder Or(string conditions)
         {
-            return AppendWithSpaceAtBeginningAndBetween("OR", conditions);
+            return AppendSpaceAtTheEnd("OR", conditions);
         }
 
         public SqlStringBuilder Between(string parameter)
         {
-            return AppendWithSpaceAtBeginningAndBetween("BETWEEN", parameter);
+            return AppendSpaceAtTheEnd("BETWEEN", parameter);
         }
 
         public SqlStringBuilder OrderByAscending(string columnNames)
@@ -81,50 +88,52 @@ namespace SqlBuilder.Core
         #endregion
 
         #region ICUDCommands Implementation
+        public SqlStringBuilder InsertInto(string tableName)
+        {
+            return AppendSpaceAtTheEnd("INSERT INTO", tableName);
+        }
+
+        public SqlStringBuilder Columns(string columnsSeparatedByComa)
+        {
+            return this;
+        }
+
+        public SqlStringBuilder Values(string valuesSeparatedByComa)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         #region Private Methods
-        private SqlStringBuilder AppendWithSpaceAtBeginning(string partialQuery)
+        private SqlStringBuilder AppendSpaceAtTheEnd(string sqlStatement)
         {
-            _query.AppendFormat(" {0}", partialQuery);
+            _query.AppendFormat("{0} ", sqlStatement).ToString();
             return this;
         }
 
-        private SqlStringBuilder AppendWithSpaceAtBeginningAndBetween(string keyword, string partialQuery)
+        private SqlStringBuilder AppendSpaceAtTheEnd(string sqlStatement, string parameters)
         {
-            _query.AppendFormat(" {0} {1}", keyword, partialQuery);
+            _query.AppendFormat("{0} {1} ", sqlStatement, parameters).ToString();
             return this;
         }
 
-        private SqlStringBuilder AppendWithSpaceAtBeginningInBetweenAndExtraKeyword(string keyword, string columnNames, string extraKeyword)
+        private SqlStringBuilder AppendSpaceAtTheEnd(string sqlStatement1, string parameters, string sqlStatement2)
         {
-            _query.AppendFormat(" {0} {1} {2}", keyword, columnNames, extraKeyword);
+            _query.AppendFormat("{0} {1} {2} ", sqlStatement1, parameters, sqlStatement2).ToString();
             return this;
         }
 
-        private SqlStringBuilder AppendWithSpaceInBetween(string keyword, string partialQuery)
+        private SqlStringBuilder TrimEndBeforeAtSpaceAtTheEnd(string sqlStatement1, string parameters, string sqlStatement2)
         {
-            _query.AppendFormat("{0} {1}", keyword, partialQuery);
-            return this;
-        }
-
-        private SqlStringBuilder AppendWithSpaceInBetweenAndExtraKeyword(string keyword, string partialQuery, string extraKeyword)
-        {
-            _query.AppendFormat("{0} {1} {2}", keyword, partialQuery, extraKeyword);
-            return this;
-        }
-
-        private SqlStringBuilder AppendWithoutSpaces(string partialQuery)
-        {
-            _query.Append(partialQuery);
-            return this;
+            _query.TrimEnd();
+            return AppendSpaceAtTheEnd(sqlStatement1, parameters, sqlStatement2);
         }
 
         private SqlStringBuilder OrderBy(string columnNames, string direction)
         {
             return _query.ToString().Contains("ORDER BY")
-                ? AppendWithSpaceInBetweenAndExtraKeyword(",", columnNames, direction)
-                : AppendWithSpaceAtBeginningInBetweenAndExtraKeyword("ORDER BY", columnNames, direction);
+                ? TrimEndBeforeAtSpaceAtTheEnd(",", columnNames, direction)
+                : AppendSpaceAtTheEnd("ORDER BY", columnNames, direction);
         }
         #endregion
     }

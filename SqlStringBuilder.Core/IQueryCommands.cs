@@ -5,7 +5,7 @@
         SqlStringBuilder SelectAll();
         SqlStringBuilder SelectDistinct();
         SqlStringBuilder Select(string parameters);
-        SqlStringBuilder From(params string[] tableNames);
+        SqlStringBuilder From(string tableNamesSeparatedByComa);
         SqlStringBuilder Where(string conditions);
         SqlStringBuilder IsNull();
         SqlStringBuilder IsNotNull();

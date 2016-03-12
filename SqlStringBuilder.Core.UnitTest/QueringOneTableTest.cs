@@ -25,90 +25,89 @@ namespace SqlBuilder.Core.UnitTest
         }
 
         [Test]
-        public void SelectAll_Should_Return_A_Select_All_Statement()
+        public void SelectAll_Should_Return_A_Select_All_Statement_With_A_Space_At_The_End()
         {
-            AssertAreEqual(Query.SelectAll, "SELECT ALL *;");
+            AssertAreEqual(Query.SelectAll, "SELECT ALL * ");
         }
 
         [Test]
-        public void SelectDistinct_Should_Return_A_Select_Distinct_Statement()
+        public void SelectDistinct_Should_Return_A_Select_Distinct_Statement_With_A_Space_At_The_End()
         {
-            AssertAreEqual(Query.SelectDistinct, "SELECT DISTINCT *;");
+            AssertAreEqual(Query.SelectDistinct, "SELECT DISTINCT * ");
         }
 
         [Test]
-        public void Select_Should_Add_Parameters_To_Select_Statement()
+        public void Select_Should_Add_Parameters_To_Select_Statement_And_Space_At_The_End()
         {
-            AssertAreEqual(() => Query.Select("ColumnA, ColumnB"), "SELECT ColumnA, ColumnB;");
+            AssertAreEqual(() => Query.Select("ColumnA, ColumnB"), "SELECT ColumnA, ColumnB ");
         }
 
         [Test]
-        public void From_Should_Add_An_Space_Before_Keyword_And_The_Table_Name_After()
+        public void From_Should_Add_Tables_To_Select_Statement_And_Space_At_The_End()
         {
-            AssertAreEqual(() => Query.From("TableName"), " FROM TableName;");
+            AssertAreEqual(() => Query.From("TableName1, TableName2"), "FROM TableName1, TableName2 ");
         }
 
         [Test]
-        public void Where_Should_Add_An_Space_Before_Keyword_And_Conditions_After()
+        public void Where_Should_Add_Conditions_To_Select_Statement_And_Space_At_The_End()
         {
-            AssertAreEqual(() => Query.Where("ColumnA = @ColumnA"), " WHERE ColumnA = @ColumnA;");
+            AssertAreEqual(() => Query.Where("ColumnA = @ColumnA"), "WHERE ColumnA = @ColumnA ");
         }
 
         [Test]
-        public void IsNull_Should_Add_An_Space_Before_Keywords()
+        public void IsNull_Should_Add_An_Space_At_The_End()
         {
-            AssertAreEqual(Query.IsNull, " IS NULL;");
+            AssertAreEqual(Query.IsNull, "IS NULL ");
         }
 
         [Test]
-        public void IsNotNull_Should_Add_An_Space_Before_Keywords()
+        public void IsNotNull_Should_Add_An_Space_At_The_End()
         {
-            AssertAreEqual(Query.IsNotNull, " IS NOT NULL;");
+            AssertAreEqual(Query.IsNotNull, "IS NOT NULL ");
         }
 
         [Test]
-        public void And_Should_Add_An_Space_Before_Keyword_And_The_Conditions_After()
+        public void And_Should_Add_Conditions_To_Select_Statement_And_Space_At_The_End()
         {
-            AssertAreEqual(() => Query.And("ColumnB < @ColumnB"), " AND ColumnB < @ColumnB;");
+            AssertAreEqual(() => Query.And("ColumnB < @ColumnB"), "AND ColumnB < @ColumnB ");
         }
 
         [Test]
-        public void Or_Should_Add_An_Space_Before_Keyword_And_the_Conditions_After()
+        public void Or_Should_Add_Conditions_To_Select_Statement_And_Space_At_The_End()
         {
-            AssertAreEqual(() => Query.Or("ColumnB < @ColumnB"), " OR ColumnB < @ColumnB;");
+            AssertAreEqual(() => Query.Or("ColumnB < @ColumnB"), "OR ColumnB < @ColumnB ");
         }
 
         [Test]
-        public void Between_Should_Add_Space_Before_Keyword_And_The_Parameter_After()
+        public void Between_Should_Add_Parameters_And_Space_At_The_End()
         {
-            AssertAreEqual(() => Query.Between("@ColumnB"), " BETWEEN @ColumnB;");
+            AssertAreEqual(() => Query.Between("@ColumnB"), "BETWEEN @ColumnB ");
         }
 
         [Test]
-        public void OrderByAscending_Should_Add_Space_Before_keyword_And_Column_Names_Before_Asc()
+        public void OrderByAscending_Should_Add_Columns_Before_Asc_And_Space_At_The_End()
         {
-            //ORDER BY column_name ASC|DESC, column_name ASC|DESC;
-            AssertAreEqual(() => Query.OrderByAscending("ColumnA"), " ORDER BY ColumnA ASC;");
+            AssertAreEqual(() => Query.OrderByAscending("ColumnA"), "ORDER BY ColumnA ASC ");
         }
 
         [Test]
         public void OrderByAscending_Should_Include_Coma_When_There_Is_Already_Order_By()
         {
             Query.OrderByAscending("ColumnA");
-            AssertAreEqual(() => Query.OrderByAscending("ColumnB"), " ORDER BY ColumnA ASC, ColumnB ASC;");
+            AssertAreEqual(() => Query.OrderByAscending("ColumnB"), "ORDER BY ColumnA ASC, ColumnB ASC ");
         }
 
         [Test]
-        public void OrderByDescending_Should_Add_Space_Before_keyword_And_Column_Names_Before_Asc()
+        public void OrderByDescending_Should_Add_Columns_Before_Desc_And_Space_At_The_End()
         {
-            AssertAreEqual(() => Query.OrderByDescending("ColumnA"), " ORDER BY ColumnA DESC;");
+            AssertAreEqual(() => Query.OrderByDescending("ColumnA"), "ORDER BY ColumnA DESC ");
         }
 
         [Test]
         public void OrderByDescending_Should_Include_Coma_When_There_Is_Already_Order_By()
         {
             Query.OrderByDescending("ColumnA");
-            AssertAreEqual(() => Query.OrderByDescending("ColumnB"), " ORDER BY ColumnA DESC, ColumnB DESC;");
+            AssertAreEqual(() => Query.OrderByDescending("ColumnB"), "ORDER BY ColumnA DESC, ColumnB DESC ");
         }
     }
 }
