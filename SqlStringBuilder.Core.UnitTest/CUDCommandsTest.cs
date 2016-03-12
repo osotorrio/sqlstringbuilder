@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace SqlBuilder.Core.UnitTest
 {
@@ -17,9 +12,15 @@ namespace SqlBuilder.Core.UnitTest
         }
 
         [Test]
-        public void InsertInto_Should_Have_An_Space_Between_InsertInto_An_The_Table_Name()
+        public void InsertInto_Should_Add_Table_To_Command_Statement_And_Space_At_The_End()
         {
-            AssertAreEqual(() => Query.InsertInto("TableName"), "INSERT INTO TableName;");
+            AssertAreEqual(() => Query.InsertInto("TableName"), "INSERT INTO TableName ");
+        }
+
+        [Test]
+        public void Values_Should_Add_Columns_Before_Values_And_Space_At_The_End()
+        {
+            AssertAreEqual(() => Query.Values("@Column1, @Column2"), "(Column1, Column2) VALUES (@Column1, @Column2) ");
         }
     }
 }

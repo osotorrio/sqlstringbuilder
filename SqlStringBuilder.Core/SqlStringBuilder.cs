@@ -1,6 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace SqlBuilder.Core
 {
@@ -93,14 +93,12 @@ namespace SqlBuilder.Core
             return AppendSpaceAtTheEnd("INSERT INTO", tableName);
         }
 
-        public SqlStringBuilder Columns(string columnsSeparatedByComa)
-        {
-            return this;
-        }
-
         public SqlStringBuilder Values(string valuesSeparatedByComa)
         {
-            throw new NotImplementedException();
+            var matches = Regex.Matches(valuesSeparatedByComa, @"\w+").Cast<Match>();
+            var columns = string.Join(", ", matches);
+            _query.AppendFormat("({0}) VALUES ({1}) ", columns, valuesSeparatedByComa);
+            return this;
         }
         #endregion
 
