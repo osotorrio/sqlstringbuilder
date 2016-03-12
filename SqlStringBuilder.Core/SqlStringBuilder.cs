@@ -123,7 +123,7 @@ namespace SqlBuilder.Core
             return this;
         }
 
-        private SqlStringBuilder TrimEndBeforeAtSpaceAtTheEnd(string sqlStatement1, string parameters, string sqlStatement2)
+        private SqlStringBuilder TrimEndAppendSpaceAtTheEnd(string sqlStatement1, string parameters, string sqlStatement2)
         {
             _query.TrimEnd();
             return AppendSpaceAtTheEnd(sqlStatement1, parameters, sqlStatement2);
@@ -132,7 +132,7 @@ namespace SqlBuilder.Core
         private SqlStringBuilder OrderBy(string columnNames, string direction)
         {
             return _query.ToString().Contains("ORDER BY")
-                ? TrimEndBeforeAtSpaceAtTheEnd(",", columnNames, direction)
+                ? TrimEndAppendSpaceAtTheEnd(",", columnNames, direction)
                 : AppendSpaceAtTheEnd("ORDER BY", columnNames, direction);
         }
         #endregion
