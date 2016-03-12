@@ -19,7 +19,7 @@ namespace SqlBuilder.Core
         }
 
         #region IQueryCommands Implementation
-        public string Semicolon()
+        public string SemiColon()
         {
             _query.TrimEnd();
             _query.Append(";");

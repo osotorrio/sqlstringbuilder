@@ -21,7 +21,7 @@ namespace SqlBuilder.Examples
 
             string query = _query.SelectAll()
                 .From("TableA, TableB, TableC")
-                .Semicolon();
+                .SemiColon();
 
             Assert.That(query, Is.EqualTo(multipleTables));
         }
@@ -33,7 +33,7 @@ namespace SqlBuilder.Examples
 
             string query = _query.SelectAll()
                 .From("TableA, TableB, TableC")
-                .Semicolon();
+                .SemiColon();
 
             Assert.That(query, Is.EqualTo(multipleTables));
         }
