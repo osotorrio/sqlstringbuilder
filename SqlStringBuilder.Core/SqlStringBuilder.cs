@@ -100,6 +100,11 @@ namespace SqlBuilder.Core
             _query.AppendFormat("({0}) VALUES ({1}) ", columns, valuesSeparatedByComa);
             return this;
         }
+
+        public SqlStringBuilder Delete()
+        {
+            return AppendSpaceAtTheEnd("DELETE");
+        }
         #endregion
 
         #region Private Methods

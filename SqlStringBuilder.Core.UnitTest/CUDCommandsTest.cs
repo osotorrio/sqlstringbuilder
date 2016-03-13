@@ -22,5 +22,11 @@ namespace SqlBuilder.Core.UnitTest
         {
             AssertAreEqual(() => Query.Values("@Column1, @Column2"), "(Column1, Column2) VALUES (@Column1, @Column2) ");
         }
+
+        [Test]
+        public void Delete_Should_Add_Delete_Statement_And_Space_At_The_End()
+        {
+            AssertAreEqual(() => Query.Delete(), "DELETE ");
+        }
     }
 }
