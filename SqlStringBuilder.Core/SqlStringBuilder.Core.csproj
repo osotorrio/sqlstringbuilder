@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICommonStatements.cs" />
     <Compile Include="ICUDCommands.cs" />
     <Compile Include="IQueryCommands.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

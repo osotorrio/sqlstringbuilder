@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace SqlBuilder.Core
 {
-    public class SqlStringBuilder : IQueryCommands, ICUDCommands
+    public class SqlStringBuilder : ICommonStatements, IQueryCommands, ICUDCommands
     {
         public string Status
         {
