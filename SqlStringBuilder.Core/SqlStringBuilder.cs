@@ -20,13 +20,6 @@ namespace SqlBuilder.Core
         }
 
         #region IQueryCommands Implementation
-        public string SemiColon()
-        {
-            _query.TrimEnd();
-            _query.Append(";");
-            return _query.ToString();
-        }
-
         public SqlStringBuilder SelectAll()
         {
             return AppendSpaceAtTheEnd("SELECT ALL *");
@@ -71,7 +64,9 @@ namespace SqlBuilder.Core
         {
             return AppendSpaceAtTheEnd("DELETE");
         }
+        #endregion
 
+        #region ICommonStatements Implementation
         public SqlStringBuilder From(string tableNamesSeparatedByComa)
         {
             return AppendSpaceAtTheEnd("FROM", tableNamesSeparatedByComa);
@@ -145,5 +140,12 @@ namespace SqlBuilder.Core
                 : AppendSpaceAtTheEnd("ORDER BY", columnNames, direction);
         }
         #endregion
+
+        public override string ToString()
+        {
+            _query.TrimEnd();
+            _query.Append(";");
+            return _query.ToString();
+        }
     }
 }

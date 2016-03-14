@@ -18,7 +18,7 @@ namespace SqlBuilder.Core.UnitTest
             const string expectedQuery = ";";
 
             //Act
-            string actualQuery = Query.SemiColon();
+            string actualQuery = Query.ToString();
 
             //Assert
             Assert.That(actualQuery, Is.EqualTo(expectedQuery));
