@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -41,6 +42,36 @@ namespace SqlBuilder.Core
             return AppendSpaceAtTheEnd("SELECT", parameters);
         }
 
+        public SqlStringBuilder OrderByAscending(string columnNames)
+        {
+            return OrderBy(columnNames, "ASC");
+        }
+
+        public SqlStringBuilder OrderByDescending(string columnNames)
+        {
+            return OrderBy(columnNames, "DESC");
+        }
+        #endregion
+
+        #region ICUDCommands Implementation
+        public SqlStringBuilder InsertInto(string tableName)
+        {
+            return AppendSpaceAtTheEnd("INSERT INTO", tableName);
+        }
+
+        public SqlStringBuilder Values(string valuesSeparatedByComa)
+        {
+            var matches = Regex.Matches(valuesSeparatedByComa, @"\w+").Cast<Match>();
+            var columns = string.Join(", ", matches);
+            _query.AppendFormat("({0}) VALUES ({1}) ", columns, valuesSeparatedByComa);
+            return this;
+        }
+
+        public SqlStringBuilder Delete()
+        {
+            return AppendSpaceAtTheEnd("DELETE");
+        }
+
         public SqlStringBuilder From(string tableNamesSeparatedByComa)
         {
             return AppendSpaceAtTheEnd("FROM", tableNamesSeparatedByComa);
@@ -76,34 +107,9 @@ namespace SqlBuilder.Core
             return AppendSpaceAtTheEnd("BETWEEN", parameter);
         }
 
-        public SqlStringBuilder OrderByAscending(string columnNames)
+        public SqlStringBuilder Like(string parameter)
         {
-            return OrderBy(columnNames, "ASC");
-        }
-
-        public SqlStringBuilder OrderByDescending(string columnNames)
-        {
-            return OrderBy(columnNames, "DESC");
-        }
-        #endregion
-
-        #region ICUDCommands Implementation
-        public SqlStringBuilder InsertInto(string tableName)
-        {
-            return AppendSpaceAtTheEnd("INSERT INTO", tableName);
-        }
-
-        public SqlStringBuilder Values(string valuesSeparatedByComa)
-        {
-            var matches = Regex.Matches(valuesSeparatedByComa, @"\w+").Cast<Match>();
-            var columns = string.Join(", ", matches);
-            _query.AppendFormat("({0}) VALUES ({1}) ", columns, valuesSeparatedByComa);
-            return this;
-        }
-
-        public SqlStringBuilder Delete()
-        {
-            return AppendSpaceAtTheEnd("DELETE");
+            return AppendSpaceAtTheEnd("LIKE", parameter);
         }
         #endregion
 

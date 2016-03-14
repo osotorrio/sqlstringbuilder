@@ -28,5 +28,11 @@ namespace SqlBuilder.Core.UnitTest
         {
             AssertAreEqual(() => Query.Delete(), "DELETE ");
         }
+
+        [Test]
+        public void Like_Should_Add_Like_Statement_And_Space_At_The_End()
+        {
+            AssertAreEqual(() => Query.Like("Pattern"), "LIKE Pattern ");
+        }
     }
 }
