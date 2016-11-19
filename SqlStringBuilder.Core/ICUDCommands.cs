@@ -2,8 +2,8 @@
 {
     public interface ICUDCommands
     {
-        SqlStringBuilder InsertInto(string tableName);
-        SqlStringBuilder Values(string valuesSeparatedByComa);
-        SqlStringBuilder Delete();
+        SqlSb InsertInto(string tableName);
+        SqlSb Values(string valuesSeparatedByComa);
+        SqlSb Delete();
     }
 }

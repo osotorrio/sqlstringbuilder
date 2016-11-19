@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace SqlBuilder.Core
 {
-    public class SqlStringBuilder : ICommonStatements, IQueryCommands, ICUDCommands
+    public class SqlSb : ICommonStatements, IQueryCommands, ICUDCommands
     {
         public string Status
         {
@@ -14,45 +14,45 @@ namespace SqlBuilder.Core
 
         private readonly StringBuilder _query;
 
-        public SqlStringBuilder()
+        public SqlSb()
         {
             _query = new StringBuilder();
         }
 
         #region IQueryCommands Implementation
-        public SqlStringBuilder SelectAll()
+        public SqlSb SelectAll()
         {
             return AppendSpaceAtTheEnd("SELECT ALL *");
         }
 
-        public SqlStringBuilder SelectDistinct()
+        public SqlSb SelectDistinct()
         {
             return AppendSpaceAtTheEnd("SELECT DISTINCT *");
         }
 
-        public SqlStringBuilder Select(string parameters)
+        public SqlSb Select(string parameters)
         {
             return AppendSpaceAtTheEnd("SELECT", parameters);
         }
 
-        public SqlStringBuilder OrderByAscending(string columnNames)
+        public SqlSb OrderByAscending(string columnNames)
         {
             return OrderBy(columnNames, "ASC");
         }
 
-        public SqlStringBuilder OrderByDescending(string columnNames)
+        public SqlSb OrderByDescending(string columnNames)
         {
             return OrderBy(columnNames, "DESC");
         }
         #endregion
 
         #region ICUDCommands Implementation
-        public SqlStringBuilder InsertInto(string tableName)
+        public SqlSb InsertInto(string tableName)
         {
             return AppendSpaceAtTheEnd("INSERT INTO", tableName);
         }
 
-        public SqlStringBuilder Values(string valuesSeparatedByComa)
+        public SqlSb Values(string valuesSeparatedByComa)
         {
             var matches = Regex.Matches(valuesSeparatedByComa, @"\w+").Cast<Match>();
             var columns = string.Join(", ", matches);
@@ -60,80 +60,80 @@ namespace SqlBuilder.Core
             return this;
         }
 
-        public SqlStringBuilder Delete()
+        public SqlSb Delete()
         {
             return AppendSpaceAtTheEnd("DELETE");
         }
         #endregion
 
         #region ICommonStatements Implementation
-        public SqlStringBuilder From(string tableNamesSeparatedByComa)
+        public SqlSb From(string tableNamesSeparatedByComa)
         {
             return AppendSpaceAtTheEnd("FROM", tableNamesSeparatedByComa);
         }
 
-        public SqlStringBuilder Where(string conditions)
+        public SqlSb Where(string conditions)
         {
             return AppendSpaceAtTheEnd("WHERE", conditions);
         }
 
-        public SqlStringBuilder IsNull()
+        public SqlSb IsNull()
         {
             return AppendSpaceAtTheEnd("IS NULL");
         }
 
-        public SqlStringBuilder IsNotNull()
+        public SqlSb IsNotNull()
         {
             return AppendSpaceAtTheEnd("IS NOT NULL");
         }
 
-        public SqlStringBuilder And(string conditions)
+        public SqlSb And(string conditions)
         {
             return AppendSpaceAtTheEnd("AND", conditions);
         }
 
-        public SqlStringBuilder Or(string conditions)
+        public SqlSb Or(string conditions)
         {
             return AppendSpaceAtTheEnd("OR", conditions);
         }
 
-        public SqlStringBuilder Between(string parameter)
+        public SqlSb Between(string parameter)
         {
             return AppendSpaceAtTheEnd("BETWEEN", parameter);
         }
 
-        public SqlStringBuilder Like(string parameter)
+        public SqlSb Like(string parameter)
         {
             return AppendSpaceAtTheEnd("LIKE", parameter);
         }
         #endregion
 
         #region Private Methods
-        private SqlStringBuilder AppendSpaceAtTheEnd(string sqlStatement)
+        private SqlSb AppendSpaceAtTheEnd(string sqlStatement)
         {
             _query.AppendFormat("{0} ", sqlStatement).ToString();
             return this;
         }
 
-        private SqlStringBuilder AppendSpaceAtTheEnd(string sqlStatement, string parameters)
+        private SqlSb AppendSpaceAtTheEnd(string sqlStatement, string parameters)
         {
             _query.AppendFormat("{0} {1} ", sqlStatement, parameters).ToString();
             return this;
         }
 
-        private SqlStringBuilder AppendSpaceAtTheEnd(string sqlStatement1, string parameters, string sqlStatement2)
+        private SqlSb AppendSpaceAtTheEnd(string sqlStatement1, string parameters, string sqlStatement2)
         {
             _query.AppendFormat("{0} {1} {2} ", sqlStatement1, parameters, sqlStatement2).ToString();
             return this;
         }
 
-        private SqlStringBuilder TrimEndBeforeAppendSpaceAtTheEnd(string sqlStatement1, string parameters, string sqlStatement2)
+        private SqlSb TrimEndBeforeAppendSpaceAtTheEnd(string sqlStatement1, string parameters, string sqlStatement2)
         {
             _query.TrimEnd();
             return AppendSpaceAtTheEnd(sqlStatement1, parameters, sqlStatement2);
         }
 
-        private SqlStringBuilder OrderBy(string columnNames, string direction)
+        private SqlSb OrderBy(string columnNames, string direction)
         {
             return _query.ToString().Contains("ORDER BY")
                 ? TrimEndBeforeAppendSpaceAtTheEnd(",", columnNames, direction)

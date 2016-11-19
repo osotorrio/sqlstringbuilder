@@ -8,7 +8,7 @@ namespace SqlBuilder.Core.UnitTest
         [SetUp]
         protected void InitBeforeEachTest()
         {
-            Query = new SqlStringBuilder();
+            Query = new SqlSb();
         }
 
         [Test]

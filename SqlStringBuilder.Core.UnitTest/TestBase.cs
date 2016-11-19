@@ -6,9 +6,9 @@ namespace SqlBuilder.Core.UnitTest
     [SetUpFixture]
     class TestBase
     {
-        protected SqlStringBuilder Query;
+        protected SqlSb Query;
 
-        protected static void AssertAreEqual(Func<SqlStringBuilder> sqlStringBuilderMethod, string expectedQuery)
+        protected static void AssertAreEqual(Func<SqlSb> sqlStringBuilderMethod, string expectedQuery)
         {
             //Act
             string actualQuery = sqlStringBuilderMethod.Invoke().Status;

@@ -2,10 +2,10 @@
 {
     public interface IQueryCommands
     {
-        SqlStringBuilder SelectAll();
-        SqlStringBuilder SelectDistinct();
-        SqlStringBuilder Select(string parameters);
-        SqlStringBuilder OrderByAscending(string columnNames);
-        SqlStringBuilder OrderByDescending(string columnNames);
+        SqlSb SelectAll();
+        SqlSb SelectDistinct();
+        SqlSb Select(string parameters);
+        SqlSb OrderByAscending(string columnNames);
+        SqlSb OrderByDescending(string columnNames);
     }
 }

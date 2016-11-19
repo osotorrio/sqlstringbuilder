@@ -6,12 +6,12 @@ namespace SqlBuilder.Examples
     [TestFixture]
     class QueringOneTableExamples
     {
-        private SqlStringBuilder _query;
+        private SqlSb _query;
 
         [SetUp]
         public void InitBeforeEachTest()
         {
-            _query = new SqlStringBuilder();
+            _query = new SqlSb();
         }
 
         [Test]
