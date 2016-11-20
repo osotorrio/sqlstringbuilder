@@ -34,5 +34,17 @@ namespace SqlBuilder.Core.UnitTest
         {
             AssertAreEqual(() => Query.Like("Pattern"), "LIKE Pattern ");
         }
+
+        [Test]
+        public void Update_Should_Add_Update_Statement_And_Space_At_The_End()
+        {
+            AssertAreEqual(() => Query.Update("TableName"), "UPDATE TableName ");
+        }
+
+        [Test]
+        public void Set_Should_Add_Set_Statement_And_Columns_Values_With_Space_At_The_End()
+        {
+            AssertAreEqual(() => Query.Set("Column1 = @Value1, Column2 = @Value2"), "SET Column1 = @Value1, Column2 = @Value2 ");
+        }
     }
 }

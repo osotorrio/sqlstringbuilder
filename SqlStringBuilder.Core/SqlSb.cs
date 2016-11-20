@@ -52,6 +52,16 @@ namespace SqlBuilder.Core
             return AppendSpaceAtTheEnd("INSERT INTO", tableName);
         }
 
+        public SqlSb Update(string tableName)
+        {
+            return AppendSpaceAtTheEnd("UPDATE", tableName);
+        }
+
+        public SqlSb Set(string columnValuePairs)
+        {
+            return AppendSpaceAtTheEnd("SET", columnValuePairs);
+        }
+
         public SqlSb Values(string valuesSeparatedByComa)
         {
             var matches = Regex.Matches(valuesSeparatedByComa, @"\w+").Cast<Match>();
